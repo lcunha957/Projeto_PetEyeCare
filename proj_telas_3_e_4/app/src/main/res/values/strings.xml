@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">telas_3_e_4</string>
+    <string name="monitorar">Monitorar</string>
+    <string name="entrar">Entrar</string>
+    <string name="alarme">Alarme</string>
+    <string name="gas">Gas</string>
+    <string name="sair">Sair</string>
+    <string name="conta">Conta</string>
+    <string name="camera">Camera</string>
+    <string name="monitoramento"> Monitoramento </string>
+    <string name="configconta"> Configurações da Conta </string>
+    <string name="nomedotcc_parte1"> Projeto PetEyeCare: </string>
+    <string name="nomedotcc_parte2"> monitoramento de pets em apartamentos</string>
+    <string name="alunos"> Projeto desenvolvido pelos alunos: Leandro Freitas (ra 21101) e Lunara Cunha (ra 21106). Cotuca, 2022 </string>
+    <string name="login_cadastrar">cadastrar</string>
+    <string name="login_limpar">limpar</string>
+</resources>

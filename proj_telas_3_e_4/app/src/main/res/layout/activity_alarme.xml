@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Alarme">
+
+
+
+    <Button
+        android:id="@+id/btnSairTAlarme"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="350dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/ic_sair" />
+
+
+    <TextView
+        android:layout_width="200dp"
+        android:layout_height="80dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginRight="10dp"
+        android:text="Alarme"
+        android:textSize="50sp"
+        android:textStyle="bold" />
+
+
+    <TextView
+        android:id="@+id/txtSensorPresenca"
+        android:layout_width="200dp"
+        android:layout_height="30dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="158dp"
+        android:layout_marginRight="10dp"
+        android:text="Sensor de presença: "
+        android:textSize="16dp"
+        android:textStyle="bold"
+        />
+
+    <EditText
+        android:id="@+id/edtTextSensorPresencaTAlarme"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="230dp"
+        android:layout_marginTop="150dp"
+        android:layout_marginRight="10dp"
+        android:textAlignment="center"
+        android:ems="20"
+        android:inputType="textPersonName"
+        android:text="ligado"
+        android:textSize="15dp" />
+
+    <TextView
+        android:id="@+id/txtSensorBuzina"
+        android:layout_width="200dp"
+        android:layout_height="30dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="193dp"
+        android:layout_marginRight="10dp"
+        android:text="Sensor de buzina: "
+        android:textSize="15dp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/edtTextSensorBuzinaTAlarme"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="230dp"
+        android:layout_marginTop="186dp"
+        android:layout_marginRight="10dp"
+        android:ems="20"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
+        android:text="ligado"
+        android:textSize="15dp" />
+
+    <TextView
+        android:id="@+id/txtSensorUltrassomTAlarme"
+        android:layout_width="200dp"
+        android:layout_height="30dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="230dp"
+        android:layout_marginRight="10dp"
+        android:text="Distância: "
+        android:textSize="16dp"
+        android:textStyle="bold"
+        />
+
+    <EditText
+        android:id="@+id/edtTextSensorUltrassomTAlarme"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:ems="20" android:layout_alignParentTop="true"
+        android:layout_marginLeft="230dp"
+        android:layout_marginTop="210dp"
+        android:layout_marginRight="10dp"
+        android:textAlignment="center"
+        android:inputType="textPersonName"
+        android:textSize="15dp"
+        android:text="11 cm" />
+
+    <TextView
+        android:id="@+id/txtSensorLedAmarelo"
+        android:layout_width="200dp"
+        android:layout_height="30dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="260dp"
+        android:layout_marginRight="10dp"
+        android:text="Sensor de led amarelo: "
+        android:textSize="16dp"
+        android:textStyle="bold"
+        />
+
+    <EditText
+        android:id="@+id/edtTextSensorLedAmareloTAlarme"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:ems="20" android:layout_alignParentTop="true"
+        android:layout_marginLeft="230dp"
+        android:layout_marginTop="240dp"
+        android:layout_marginRight="10dp"
+        android:textAlignment="center"
+        android:inputType="textPersonName"
+        android:textSize="15dp"
+        android:text="ligado" />
+
+    <TextView
+        android:id="@+id/txtSensorLedVermelhoTAlarme"
+        android:layout_width="200dp"
+        android:layout_height="30dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="290dp"
+        android:layout_marginRight="10dp"
+        android:text="Sensor de led vermelho: "
+        android:textSize="16dp"
+        android:textStyle="bold"
+        />
+
+    <EditText
+        android:id="@+id/edtTextSensorLedVermelhoTAlarme"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:ems="20" android:layout_alignParentTop="true"
+        android:layout_marginLeft="230dp"
+        android:layout_marginTop="270dp"
+        android:layout_marginRight="10dp"
+        android:textAlignment="center"
+        android:inputType="textPersonName"
+        android:textSize="15dp"
+        android:text="desligado" />
+
+    <TextView
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="340dp"
+        android:layout_marginRight="10dp"
+        android:text="Histórico de SMS"
+        android:textColor="@color/medium_blue"
+        android:textAlignment="center"
+        android:textSize="35sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/txtSMSTAlarme"
+        android:layout_width="300dp"
+        android:layout_height="80dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="400dp"
+        android:layout_marginRight="10dp"
+        android:text="19992460030: Estelinha está a 11cm da janela! [10/10/2022, 21:22:35]"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        app:itemBackground="@color/royal_blue"
+        app:itemIconTint="@drawable/selector"
+        app:itemTextColor="@drawable/selector"
+        app:menu="@menu/menu_navigation"
+        />
+
+
+
+</RelativeLayout>

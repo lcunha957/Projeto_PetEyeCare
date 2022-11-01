@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/account"
+        android:title="@string/conta"
+        android:icon="@drawable/ic_conta"/>
+    <item
+        android:id="@+id/spy"
+        android:title="@string/monitorar"
+        android:icon="@drawable/ic_monitorar"/>
+     <item
+         android:id="@+id/alarm"
+         android:title="@string/alarme"
+         android:icon="@drawable/ic_alarme"/>
+    <item
+        android:id="@+id/fotos_esp"
+        android:title="@string/camera"
+        android:icon="@drawable/ic_camera"/>
+    <item
+        android:id="@+id/gas"
+        android:title="@string/gas"
+        android:icon="@drawable/ic_gas"/>
+
+
+</menu>
