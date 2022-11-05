@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
                     String url = "http://192.168.1.17/";
 
                     new SolicitaDados().execute(url);
-                 
+
                 } else {
                     Toast.makeText(MainActivity.this, "Nenhuma conexão de internet foi encontrada!", Toast.LENGTH_LONG).show();
                 }
