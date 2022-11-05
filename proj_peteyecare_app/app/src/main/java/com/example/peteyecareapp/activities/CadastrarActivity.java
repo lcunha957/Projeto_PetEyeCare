@@ -6,11 +6,11 @@ import android.os.Bundle;
 
 import com.example.peteyecareapp.R;
 
-public class ContaActivity extends AppCompatActivity {
+public class CadastrarActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_conta);
+        setContentView(R.layout.activity_cadastrar);
     }
 }
