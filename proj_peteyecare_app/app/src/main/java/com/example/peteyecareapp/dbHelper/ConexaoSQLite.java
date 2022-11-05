@@ -97,6 +97,19 @@ public class ConexaoSQLite extends SQLiteOpenHelper {
                         ")";
         db.execSQL(sqlTabelaImagens);
 
+
+        // tabela historicoalarme
+        String sqlTabelaHistoricoAlarme =
+                "CREATE TABLE IF NOT EXISTS historicoalarme" +
+                        "(" +
+                        "id INTEGER PRIMARY KEY," +
+                        "histam_idUsuario INTEGER(3), " +
+                        "mensagem TEXT(500), " +
+                        "data_criacao INTEGER" +
+                        ")";
+
+        db.execSQL(sqlTabelaHistoricoAlarme);
+
     }
 
     @Override

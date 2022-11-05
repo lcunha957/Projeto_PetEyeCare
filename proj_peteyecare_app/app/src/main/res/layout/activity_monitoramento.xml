@@ -25,6 +25,7 @@
         android:layout_marginTop="120dp"
         android:text="@string/monitoramento"
         android:textSize="35dp"
+        android:textColor="@color/light_orange"
         android:textStyle="bold" />
 
     <Button

@@ -21,4 +21,7 @@
     <color name="medium_brown">#B14B1C</color>
     <color name="medium_pink">#C495055C</color>
     <color name="light_blue">#5A688E</color>
+    <color name="light_red">#CD5C5C</color>
+    <color name="medium_green">#36B33B</color>
+    <color name="teal_400">#44C5CA</color>
 </resources>
