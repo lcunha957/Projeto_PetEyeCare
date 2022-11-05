@@ -39,9 +39,9 @@ public class ConexaoSQLite extends SQLiteOpenHelper {
                         "email TEXT(50)," +
                         "senha TEXT(5)," +
                         "celular INTEGER(11)," +
-                        "usu_idEndereco INTEGER(2)," +
-                        "usu_idAnimal INTEGER(2)," +
-                        "usu_idWifi INTEGER(2)," +
+                        "usu_idEndereco INTEGER(3)," +
+                        "usu_idAnimal INTEGER(3)," +
+                        "usu_idWifi INTEGER(3)," +
                         "data_criacao INTEGER" +
                         ")";
         db.execSQL(sqlTabelaUsuario);
@@ -65,8 +65,8 @@ public class ConexaoSQLite extends SQLiteOpenHelper {
                         "tipo TEXT(8)," +
                         "nomeAnimal TEXT(20)," +
                         "sobrenomeAnimal TEXT(20)," +
-                        "animal_idEndereco INTEGER(2)," +
-                        "animal_idUsuario INTEGER(2)," +
+                        "animal_idEndereco INTEGER(3)," +
+                        "animal_idUsuario INTEGER(3)," +
                         "data_criacao INTEGER" +
                         ")";
 
@@ -77,8 +77,8 @@ public class ConexaoSQLite extends SQLiteOpenHelper {
                 "CREATE TABLE IF NOT EXISTS endereco" +
                         "(" +
                         "id INTEGER PRIMARY KEY," +
-                        "endereco_idUsuario INTEGER(2)," +
-                        "cep INTEGER(2) UNIQUE," +
+                        "endereco_idUsuario INTEGER(3)," +
+                        "cep INTEGER(8) UNIQUE," +
                         "numeroResidencia INTEGER(3)," +
                         "complemento TEXT(3)," +
                         "data_criacao INTEGER" +
@@ -91,7 +91,7 @@ public class ConexaoSQLite extends SQLiteOpenHelper {
                 "CREATE TABLE IF NOT EXISTS imagens" +
                         "(" +
                         "id INTEGER PRIMARY KEY," +
-                        "imagens_idAnimal INTEGER(2)," +
+                        "imagens_idAnimal INTEGER(3)," +
                         "url TEXT(200)," +
                         "data_criacao INTEGER" +
                         ")";
