@@ -191,7 +191,6 @@
         android:layout_marginLeft="10dp"
         android:layout_marginTop="400dp"
         android:layout_marginRight="10dp"
-        android:text="19992460030: Estelinha está a 11cm da janela! [10/10/2022, 21:22:35]"
         android:textAlignment="center"
         android:textSize="20sp"
         android:textStyle="bold" />

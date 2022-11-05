@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="5dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="Código da Imagem: "
+            android:textColor="@color/dark_red"/>
+        <TextView
+            android:id="@+id/tvCodImagem"
+            android:textColor="@color/dark_magenta"
+            android:layout_marginLeft="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSelectHandle="@color/medium_pink"
+            />
+    </LinearLayout>
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="5dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="Código do Animal: "
+            android:textColor="@color/dark_red"/>
+        <TextView
+            android:id="@+id/tvCodAnimal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:textSelectHandle="@color/medium_pink"/>
+    </LinearLayout>
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="5dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text=" URL Imagem: "
+            android:textColor="@color/dark_red"/>
+        <TextView
+            android:id="@+id/tvUrlImagem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSelectHandle="@color/medium_pink"/>
+    </LinearLayout>
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="5dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text=" Data de criação: "
+           android:textColor="@color/dark_red"/>
+        <TextView
+            android:id="@+id/tvDataCriacao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSelectHandle="@color/medium_pink"/>
+    </LinearLayout>
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="15dp"/>
+
+</LinearLayout>
