@@ -53,7 +53,8 @@
         android:textAlignment="center"
         android:ems="40"
         android:inputType="textPersonName"
-        android:text="ligada"
+        android:hint="ligada ou desligada"
+        android:text=""
         android:textSize="15dp" />
 
     <TextView
