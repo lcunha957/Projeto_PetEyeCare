@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="vertical">
+
+    <Space
+        android:layout_height="50dp"
+        android:layout_width="350dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="20dp"
+     />
+
+    <TextView
+        android:layout_height="50dp"
+        android:layout_width="350dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="20dp"
+        android:text="Insira o ip do servidor via ESP32-CAM"
+        android:textStyle="bold"
+        android:gravity="center_vertical|center_horizontal"
+        android:textColor="@color/black"
+        android:textAlignment="center"/>
+
+    <EditText
+        android:id="@+id/edit_ip_address"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="20dp"
+        android:ems="15"
+        />
+
+     <Button
+         android:id="@+id/btnip"
+         android:layout_height="60dp"
+         android:layout_width="350dp"
+         android:layout_marginLeft="20dp"
+         android:layout_marginTop="40dp"
+         android:text="Enter"/>
+</LinearLayout>
