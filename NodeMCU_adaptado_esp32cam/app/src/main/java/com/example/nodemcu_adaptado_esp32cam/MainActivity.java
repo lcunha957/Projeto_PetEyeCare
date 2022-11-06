@@ -8,6 +8,7 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,6 +20,9 @@ public class MainActivity extends AppCompatActivity {
     private Button btnLed1, btnLed2, btnLed3, btnTodos;
     private TextView txtLdr;
     private EditText txtResultado;
+
+    // começa com true porque inicia aberta pra permitir que venha dados
+    private boolean statusRecebimento = true;
 
     // preciso da Handle com processamento separado que interaja com a interface gráfica:
     Handler handler = new Handler();
@@ -78,10 +82,26 @@ public class MainActivity extends AppCompatActivity {
     private Runnable atualizaStatus = new Runnable() {
         @Override
         public void run() {
+            if(statusRecebimento){
         solicita("");
         handler.postDelayed(this, 2000); //a cada 2s carrega o app de novo
+
+            Log.d("Status", "Solicitado");
+        }
+       else{
+           handler.removeCallbacks(atualizaStatus);
+                Log.d("Status", "Finalizado");
+       }
         }
     };
+
+    // quando sair do app a tarefa é destruída e o aplicativo é realmente parado no sistema
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        statusRecebimento = false;
+    }
 
     public void solicita(String comando) {
         // ver se tem internet no celular
