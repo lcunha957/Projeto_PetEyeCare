@@ -7,47 +7,103 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/btnLed1"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="LED1 - DESLIGADO" />
+        android:gravity="center_horizontal|center_vertical"
+        android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/btnLed2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="LED2 - DESLIGADO" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="LED 1"
+            android:textStyle="bold"
+            android:textSize="30sp"
+            android:textColor="@color/black"/>
+        <Button
+            android:id="@+id/btnLed1"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/img_off"
+             />
 
-    <Button
-        android:id="@+id/btnLed3"
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="LED3 - DESLIGADO" />
+        android:gravity="center_horizontal|center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="LED 2"
+            android:textStyle="bold"
+            android:textSize="30sp"
+            android:textColor="@color/black"/>
+        <Button
+            android:id="@+id/btnLed2"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/img_off"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal|center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="LED 3"
+            android:textStyle="bold"
+            android:textSize="30sp"
+            android:textColor="@color/black"/>
+        <Button
+            android:id="@+id/btnLed3"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/img_off"
+             />
+
+    </LinearLayout>
+
 
     <Button
         android:id="@+id/btnTodos"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
         android:text="TODOS " />
 
     <TextView
         android:id="@+id/txtLdr"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:textSize="30dp"
+        android:layout_width="350dp"
+        android:layout_marginLeft="30dp"
+        android:layout_height="50dp"
         android:textColor="@color/dark_red"
-        android:text="0"/>
+        android:text="0"
+        android:gravity="center"/>
 
     <EditText
         android:id="@+id/txtResultado"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:textSize="30dp"
+        android:layout_width="350dp"
+        android:layout_marginLeft="30dp"
+        android:layout_height="50dp"
         android:textColor="@color/teal_700"
-        android:text="0"
-        />
+        android:text=""
+        android:editable="false"
+        android:gravity="center"/>
+
+
 
 </LinearLayout>

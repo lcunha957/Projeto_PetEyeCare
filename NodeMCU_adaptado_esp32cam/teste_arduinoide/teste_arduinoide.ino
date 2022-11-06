@@ -3,6 +3,11 @@
 // Led verde no GPIO14, led amarelo no GPIO13, led vermelho no GPIO12, ldr no GPIO2.
 // IP do servidor no vídeo: 192.168.0.36
 
+IPAddress ip(192,168,10, 150);
+IPAddress gateway(192,168,1, 1);
+IPAddress subnet(255,255,255, 0);
+IPAddress dns(207,77,112,48);
+
 /*192.168.1.1
 */
 //#include<ESP8266.Wifi>
@@ -33,6 +38,7 @@ void setup() {
   Serial.print("Conectando com...");
   Serial.println(ssid);
 
+  Wifi.config(ip,dns,gateway,subnet); // para deixar mais rápida a conexão....
   Wifi.begin(ssid, password);
 
   while (Wifi.status() != WL_CONNECTED) {
