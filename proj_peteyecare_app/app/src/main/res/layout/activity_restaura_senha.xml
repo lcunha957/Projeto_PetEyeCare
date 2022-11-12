@@ -85,7 +85,7 @@
         android:layout_marginRight="50dp"
         android:layout_centerVertical="true"
         android:backgroundTint="@color/teal_400"
-        android:text="Enviar SMS" />
+        android:text="Enviar " />
 
     <TextView
         android:layout_width="190dp"
@@ -104,7 +104,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="350dp"
         android:layout_marginRight="20dp"
-        android:text="Logue novamente adiante com o código de SMS enviado e altere a senha na tela de Configurações da Conta!"
+        android:text="Logue novamente adiante com o código enviado e altere a senha na tela de Configurações da Conta!"
         android:textColor="@color/dark_red"
         android:textSize="20dp"
         android:textStyle="bold" />
@@ -157,7 +157,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="200dp"
         android:layout_marginTop="580dp"
-        android:text="Senha do SMS:"
+        android:text="Senha enviada:"
         android:textSize="15dp"
         android:textColor="@color/black"
         android:textStyle="bold" />

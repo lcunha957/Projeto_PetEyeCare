@@ -181,18 +181,36 @@
         android:textSize="12sp"
         android:textStyle="bold" />
 
-
     <TextView
-        android:layout_width="140dp"
+        android:layout_width="120dp"
         android:layout_height="20dp"
         android:layout_alignParentTop="true"
-        android:layout_centerInParent="true"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="230dp"
-        android:text="Dados de Wifi:"
-        android:textColor="@color/medium_brown"
-        android:textSize="15sp"
+        android:text="Chat id do telegram:"
+        android:textColor="@color/black"
+        android:textSize="12sp"
         android:textStyle="bold" />
+    <EditText
+        android:id="@+id/edtTextChatIdTelegram"
+        android:layout_width="800dp"
+        android:layout_height="40dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="135dp"
+        android:layout_marginTop="215dp"
+        android:layout_marginRight="50dp"
+        android:hint="Insira uma senha: senha123"
+        android:inputType="textVisiblePassword"
+        android:text=""
+        android:textColor="@color/black"
+        android:textColorHint="@color/light_blue"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+
+
+
+
 
 
     <TextView
@@ -252,15 +270,14 @@
         android:textStyle="bold" />
 
     <TextView
-        android:layout_width="140dp"
-        android:layout_height="20dp"
+        android:layout_width="350dp"
+        android:layout_height="40dp"
         android:layout_alignParentTop="true"
-        android:layout_centerInParent="true"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="310dp"
-        android:text="Dados de Endereço:"
+        android:text=" Para capturar o chat id do telegram, acesse: https://t.me/getmyid_bot e escreva /start. Escreva a credencial no campo Chat id do telegram deste cadastro."
         android:textColor="@color/light_orange"
-        android:textSize="15sp"
+        android:textSize="10sp"
         android:textStyle="bold" />
 
     <TextView
@@ -268,7 +285,7 @@
         android:layout_height="20dp"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="345dp"
+        android:layout_marginTop="355dp"
         android:text="CEP:"
         android:textColor="@color/black"
         android:textSize="12sp"
@@ -279,8 +296,8 @@
         android:layout_width="800dp"
         android:layout_height="40dp"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="65dp"
-        android:layout_marginTop="330dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="345dp"
         android:layout_marginRight="50dp"
         android:hint="Insira o cep da residência(12345978)"
         android:inputType="textPostalAddress"
@@ -296,7 +313,7 @@
         android:layout_height="20dp"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="375dp"
+        android:layout_marginTop="390dp"
         android:text="Número da residência:"
         android:textColor="@color/black"
         android:textSize="12sp"
@@ -308,7 +325,7 @@
         android:layout_height="40dp"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="150dp"
-        android:layout_marginTop="360dp"
+        android:layout_marginTop="375dp"
         android:layout_marginRight="50dp"
         android:hint="Insira o numero da residência(12345567)"
         android:inputType="text"
@@ -323,7 +340,7 @@
         android:layout_height="20dp"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="400dp"
+        android:layout_marginTop="420dp"
         android:text="Complemento:"
         android:textColor="@color/black"
         android:textSize="12sp"
@@ -335,7 +352,7 @@
         android:layout_height="40dp"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="110dp"
-        android:layout_marginTop="385dp"
+        android:layout_marginTop="410dp"
         android:layout_marginRight="50dp"
         android:hint="Apartamento e bloco(45C)"
         android:inputType="text"
@@ -345,17 +362,6 @@
         android:textSize="12sp"
         android:textStyle="bold" />
 
-    <TextView
-        android:layout_width="110dp"
-        android:layout_height="20dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerInParent="true"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="430dp"
-        android:text="Dados do PET:"
-        android:textColor="@color/dark_magenta"
-        android:textSize="15sp"
-        android:textStyle="bold" />
 
     <TextView
         android:layout_width="90dp"
