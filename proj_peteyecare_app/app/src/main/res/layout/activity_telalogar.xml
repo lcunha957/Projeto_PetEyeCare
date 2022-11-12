@@ -123,6 +123,7 @@
         android:backgroundTint="@color/medium_blue" />
 
     <Button
+        android:onClick="Registro"
         android:id="@+id/btnCadastrarLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

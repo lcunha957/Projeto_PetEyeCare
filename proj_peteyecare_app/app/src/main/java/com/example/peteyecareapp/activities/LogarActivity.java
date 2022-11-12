@@ -71,4 +71,9 @@ public class LogarActivity extends AppCompatActivity {
       });
 
     }
+    public void Registro(View view){
+        Intent intent = new Intent(this, CadastrarActivity.class);
+        startActivity(intent);
+    }
+
 }
