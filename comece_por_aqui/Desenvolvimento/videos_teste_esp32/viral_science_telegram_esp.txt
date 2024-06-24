@@ -1,0 +1,440 @@
+Viral Science
+Fonte: https://www.youtube.com/watch?v=v36c7-s3jvA
+
+Conexões:
+ESP32-CAM ------------- FTDI
+3.3V                    3.3V (VCC)
+GND com GPIO0           não usa ftdi
+UDR                        TX
+UOT                       RX
+GND                      GND
+FTDI setada em 5V
+
+
+Para o sensor pir: (olhando com os dois pinos laranjas pra cima)
+O da esquerda(1) é o fio preto de GND, ligado no GND esquerdo da esp.
+O do  meio(2) é o fio amarelo de sinal, ligado no GPIO13.
+O da direita(3,mais pra baixo) é o fio vermelho de VCC, ligado
+no 5V da esp.
+Desta forma, ficaria: 
+1
+2
+3
+
+Abrir o telegram e procurar por botfather,colocar /start.
+Colocar /new e nomear o  robô com nome e id(terminando em_bot).
+Grave o token.
+
+Depois, no telegram procure pelo bot recém-criado, escreva
+/start. Depois pesquise get id bot, e guarde o chat id após
+dar start.
+
+Configurações da Placa: ESP32 Wrover Module,
+ flash frequency: 80MHz,
+upload speed: 115200,flash mode: QIO, 
+partition scheme: Huge App (3MB No OTA/3MB SPIFFS),
+programmer: ArduinoISP. Câmera usada: AI Thinker
+
+O código é esse:
+// Viral Science www.viralsciencecreativity.com www.youtube.com/c/viralscience
+// ESP32 Cam Motion Alert | Send Image to Telegram
+
+// Enter your WiFi ssid and password
+const char* ssid     = "Lunara";   //WIFI SSID
+const char* password = "d9-48Z11";   //WIFI password
+String token = "5650609996:AAH8eaE36L98jBCZHbJU5rIFvqcB778WwtA";
+String chat_id = "1765125698";
+
+#include <WiFi.h>
+#include <WiFiClientSecure.h>
+#include "soc/soc.h"
+#include "soc/rtc_cntl_reg.h"
+#include "esp_camera.h"
+
+//CAMERA_MODEL_AI_THINKER
+#define PWDN_GPIO_NUM     32
+#define RESET_GPIO_NUM    -1
+#define XCLK_GPIO_NUM      0
+#define SIOD_GPIO_NUM     26
+#define SIOC_GPIO_NUM     27
+#define Y9_GPIO_NUM       35
+#define Y8_GPIO_NUM       34
+#define Y7_GPIO_NUM       39
+#define Y6_GPIO_NUM       36
+#define Y5_GPIO_NUM       21
+#define Y4_GPIO_NUM       19
+#define Y3_GPIO_NUM       18
+#define Y2_GPIO_NUM        5
+#define VSYNC_GPIO_NUM    25
+#define HREF_GPIO_NUM     23
+#define PCLK_GPIO_NUM     22
+
+int gpioPIR = 13;   //PIR Motion Sensor
+
+void setup()
+{
+  WRITE_PERI_REG(RTC_CNTL_BROWN_OUT_REG, 0);
+  
+  Serial.begin(115200);
+  delay(10);
+  WiFi.mode(WIFI_STA);
+  Serial.println("");
+  Serial.print("Connecting to ");
+  Serial.println(ssid);
+  WiFi.begin(ssid, password);  
+  long int StartTime=millis();
+  while (WiFi.status() != WL_CONNECTED) 
+  {
+    delay(500);
+    if ((StartTime+10000) < millis()) break;
+  } 
+
+  Serial.println("");
+  Serial.println("STAIP address: ");
+  Serial.println(WiFi.localIP());
+  Serial.println("");
+
+  if (WiFi.status() != WL_CONNECTED) {
+    Serial.println("Reset");
+    
+    ledcAttachPin(4, 3);
+    ledcSetup(3, 5000, 8);
+    ledcWrite(3,10);
+    delay(200);
+    ledcWrite(3,0);
+    delay(200);    
+    ledcDetachPin(3);
+    delay(1000);
+    ESP.restart();
+  }
+  else 
+  {
+    ledcAttachPin(4, 3);
+    ledcSetup(3, 5000, 8);
+    for (int i=0;i<5;i++) {
+      ledcWrite(3,10);
+      delay(200);
+      ledcWrite(3,0);
+      delay(200);    
+    }
+    ledcDetachPin(3);      
+  }
+
+  camera_config_t config;
+  config.ledc_channel = LEDC_CHANNEL_0;
+  config.ledc_timer = LEDC_TIMER_0;
+  config.pin_d0 = Y2_GPIO_NUM;
+  config.pin_d1 = Y3_GPIO_NUM;
+  config.pin_d2 = Y4_GPIO_NUM;
+  config.pin_d3 = Y5_GPIO_NUM;
+  config.pin_d4 = Y6_GPIO_NUM;
+  config.pin_d5 = Y7_GPIO_NUM;
+  config.pin_d6 = Y8_GPIO_NUM;
+  config.pin_d7 = Y9_GPIO_NUM;
+  config.pin_xclk = XCLK_GPIO_NUM;
+  config.pin_pclk = PCLK_GPIO_NUM;
+  config.pin_vsync = VSYNC_GPIO_NUM;
+  config.pin_href = HREF_GPIO_NUM;
+  config.pin_sscb_sda = SIOD_GPIO_NUM;
+  config.pin_sscb_scl = SIOC_GPIO_NUM;
+  config.pin_pwdn = PWDN_GPIO_NUM;
+  config.pin_reset = RESET_GPIO_NUM;
+  config.xclk_freq_hz = 20000000;
+  config.pixel_format = PIXFORMAT_JPEG;
+
+  if(psramFound())
+{
+    config.frame_size = FRAMESIZE_VGA;
+    config.jpeg_quality = 10;  //0-63 lower number means higher quality
+    config.fb_count = 2;
+  } 
+else 
+{
+    config.frame_size = FRAMESIZE_QQVGA;
+    config.jpeg_quality = 12;  //0-63 lower number means higher quality
+    config.fb_count = 1;
+  }
+  
+  // camera init
+  esp_err_t err = esp_camera_init(&config);
+  if (err != ESP_OK) 
+{
+    Serial.printf("Camera init failed with error 0x%x", err);
+    delay(1000);
+    ESP.restart();
+  }
+
+sensor_t * s = esp_camera_sensor_get();
+ s->set_framesize(s, FRAMESIZE_XGA);  
+
+}
+
+void loop()
+{
+ 
+  pinMode(gpioPIR, INPUT_PULLUP);
+  int v = digitalRead(gpioPIR);
+  Serial.println(v);
+  if (v==1)
+  {
+    alerts2Telegram(token, chat_id);
+    delay(10000); 
+  }
+  delay(1000);  
+  
+}
+
+String alerts2Telegram(String token, String chat_id) 
+{
+  const char* myDomain = "api.telegram.org";
+  String getAll="", getBody = "";
+
+  camera_fb_t * fb = NULL;
+  fb = esp_camera_fb_get();  
+  if(!fb) 
+{
+    Serial.println("Camera capture failed");
+    delay(1000);
+    ESP.restart();
+    return "Camera capture failed";
+  }  
+  
+
+WiFiClientSecure client_tcp;
+  
+  if (client_tcp.connect(myDomain, 443)) 
+{
+    Serial.println("Connected to " + String(myDomain));
+    
+    String head = "--India\r\nContent-Disposition: form-data; name=\"chat_id\"; \r\n\r\n" + chat_id + "\r\n--India\r\nContent-Disposition: form-data; name=\"photo\"; filename=\"esp32-cam.jpg\"\r\nContent-Type: image/jpeg\r\n\r\n";
+    String tail = "\r\n--India--\r\n";
+
+    uint16_t imageLen = fb->len;
+    uint16_t extraLen = head.length() + tail.length();
+    uint16_t totalLen = imageLen + extraLen;
+  
+    client_tcp.println("POST /bot"+token+"/sendPhoto HTTP/1.1");
+    client_tcp.println("Host: " + String(myDomain));
+    client_tcp.println("Content-Length: " + String(totalLen));
+    client_tcp.println("Content-Type: multipart/form-data; boundary=India");
+    client_tcp.println();
+    client_tcp.print(head);
+  
+    uint8_t *fbBuf = fb->buf;
+    size_t fbLen = fb->len;
+
+
+    for (size_t n=0;n<fbLen;n=n+1024)
+ {
+
+      if (n+1024<fbLen) 
+{
+        client_tcp.write(fbBuf, 1024);
+        fbBuf += 1024;
+      }
+      else if (fbLen%1024>0) 
+{
+        size_t remainder = fbLen%1024;
+        client_tcp.write(fbBuf, remainder);
+      }
+    }  
+    
+    client_tcp.print(tail);
+    
+    esp_camera_fb_return(fb);
+    
+    int waitTime = 10000;   // timeout 10 seconds
+    long startTime = millis();
+    boolean state = false;
+    
+    while ((startTime + waitTime) > millis())
+    {
+      Serial.print(".");
+      delay(100);      
+      while (client_tcp.available()) 
+      {
+          char c = client_tcp.read();
+          if (c == '\n') 
+          {
+            if (getAll.length()==0) state=true; 
+            getAll = "";
+          } 
+          else if (c != '\r')
+            getAll += String(c);
+          if (state==true) getBody += String(c);
+          startTime = millis();
+       }
+       if (getBody.length()>0) break;
+    }
+    client_tcp.stop();
+    Serial.println(getBody);
+  }
+  else {
+    getBody = "Connection to telegram failed.";
+    Serial.println("Connection to telegram failed.");
+  }
+  
+  return getBody;
+}
+
+
+
+No modo do vídeo não funcionou para o computador usado 
+(LeNovo). Logo, usaremos o mesmo circuito que o professor
+Sérgio nos ensinou no dia 25-10, com resistor pull up.
+
+
+Testei com o telegram, entrou na camera e no Wifi, porém
+não conectou com o Telegram. Mesmo trocando de Wifi e criando
+o novo bot.
+
+Porém, em consulta ao StackOverFlow, descobri ser uma 
+particularidade de versões acima de 1.0.5 da biblioteca esp32
+no Arduíno que não entra no protocolo tcp se entender 
+que é inseguro (uso do https). 
+Para tanto, tive que fazer:
+
+  WiFiClientSecure client_tcp;
+  client_tcp.setInsecure();   //run version 1.0.5 or above
+
+
+A saída do monitor serial foi essa:
+0
+0
+0
+1
+Connected to api.telegram.org
+...............................
+{"ok":true,"result":{"message_id":15,"from":{"id":5650609996,"is_bot":true,"first_name":"MotionAlertCam_pet","username":"PetCamPir_bot"},"chat":{"id":1765125698,"first_name":"Lunara","last_name":"Cunha","username":"lcunha957","type":"private"},"date":1666896154,"photo":[{"file_id":"AgACAgEAAxkDAAMPY1rRGnwp-votb9q9OgjXnryeMAoAAhGrMRvq9NhG6pCJLczo7ogBAAMCAANzAAMqBA","file_unique_id":"AQADEasxG-r02EZ4","file_size":1331,"width":90,"height":67},{"file_id":"AgACAgEAAxkDAAMPY1rRGnwp-votb9q9OgjXnryeMAoAAhGrMRvq9NhG6pCJLczo7ogBAAMCAANtAAMqBA","file_unique_id":"AQADEasxG-r02EZy","file_size":12984,"width":320,"height":240},{"file_id":"AgACAgEAAxkDAAMPY1rRGnwp-votb9q9OgjXnryeMAoAAhGrMRvq9NhG6pCJLczo7ogBAAMCAAN5AAMqBA","file_unique_id":"AQADEasxG-r02EZ-","file_size":47880,"width":1024,"height":768},{"file_id":"AgACAgEAAxkDAAMPY1rRGnwp-votb9q9OgjXnryeMAoAAhGrMRvq9NhG6pCJLczo7ogBAAMCAAN4AAMqBA","file_unique_id":"AQADEasxG-r02EZ9","file_size":53965,"width":800,"height":600}]}}
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+1
+Connected to api.telegram.org
+..........
+{"ok":true,"result":{"message_id":16,"from":{"id":5650609996,"is_bot":true,"first_name":"MotionAlertCam_pet","username":"PetCamPir_bot"},"chat":{"id":1765125698,"first_name":"Lunara","last_name":"Cunha","username":"lcunha957","type":"private"},"date":1666896222,"photo":[{"file_id":"AgACAgEAAxkDAAMQY1rRXUkow5AtA4o_UwH3v00Y6NIAAhKrMRvq9NhGNv0hfe0tHoYBAAMCAANzAAMqBA","file_unique_id":"AQADEqsxG-r02EZ4","file_size":1305,"width":90,"height":67},{"file_id":"AgACAgEAAxkDAAMQY1rRXUkow5AtA4o_UwH3v00Y6NIAAhKrMRvq9NhGNv0hfe0tHoYBAAMCAANtAAMqBA","file_unique_id":"AQADEqsxG-r02EZy","file_size":12016,"width":320,"height":240},{"file_id":"AgACAgEAAxkDAAMQY1rRXUkow5AtA4o_UwH3v00Y6NIAAhKrMRvq9NhGNv0hfe0tHoYBAAMCAAN5AAMqBA","file_unique_id":"AQADEqsxG-r02EZ-","file_size":44701,"width":1024,"height":768},{"file_id":"AgACAgEAAxkDAAMQY1rRXUkow5AtA4o_UwH3v00Y6NIAAhKrMRvq9NhGNv0hfe0tHoYBAAMCAAN4AAMqBA","file_unique_id":"AQADEqsxG-r02EZ9","file_size":50711,"width":800,"height":600}]}}
+0
+1
+Connected to api.telegram.org
+..........
+{"ok":true,"result":{"message_id":17,"from":{"id":5650609996,"is_bot":true,"first_name":"MotionAlertCam_pet","username":"PetCamPir_bot"},"chat":{"id":1765125698,"first_name":"Lunara","last_name":"Cunha","username":"lcunha957","type":"private"},"date":1666896241,"photo":[{"file_id":"AgACAgEAAxkDAAMRY1rRcUryuRIkHsOgqMRZgrwpGKcAAhOrMRvq9NhGes56BUUAAWbTAQADAgADcwADKgQ","file_unique_id":"AQADE6sxG-r02EZ4","file_size":1033,"width":90,"height":67},{"file_id":"AgACAgEAAxkDAAMRY1rRcUryuRIkHsOgqMRZgrwpGKcAAhOrMRvq9NhGes56BUUAAWbTAQADAgADbQADKgQ","file_unique_id":"AQADE6sxG-r02EZy","file_size":8892,"width":320,"height":240},{"file_id":"AgACAgEAAxkDAAMRY1rRcUryuRIkHsOgqMRZgrwpGKcAAhOrMRvq9NhGes56BUUAAWbTAQADAgADeQADKgQ","file_unique_id":"AQADE6sxG-r02EZ-","file_size":34005,"width":1024,"height":768},{"file_id":"AgACAgEAAxkDAAMRY1rRcUryuRIkHsOgqMRZgrwpGKcAAhOrMRvq9NhGes56BUUAAWbTAQADAgADeAADKgQ","file_unique_id":"AQADE6sxG-r02EZ9","file_size":38864,"width":800,"height":600}]}}
+1
+Connected to api.telegram.org
+......................
+{"ok":true,"result":{"message_id":18,"from":{"id":5650609996,"is_bot":true,"first_name":"MotionAlertCam_pet","username":"PetCamPir_bot"},"chat":{"id":1765125698,"first_name":"Lunara","last_name":"Cunha","username":"lcunha957","type":"private"},"date":1666896257,"photo":[{"file_id":"AgACAgEAAxkDAAMSY1rRgfA6Egg42g1mcCCvMWTYmrgAAhSrMRvq9NhGt-KkkWwSbt4BAAMCAANzAAMqBA","file_unique_id":"AQADFKsxG-r02EZ4","file_size":1195,"width":90,"height":67},{"file_id":"AgACAgEAAxkDAAMSY1rRgfA6Egg42g1mcCCvMWTYmrgAAhSrMRvq9NhGt-KkkWwSbt4BAAMCAANtAAMqBA","file_unique_id":"AQADFKsxG-r02EZy","file_size":10612,"width":320,"height":240},{"file_id":"AgACAgEAAxkDAAMSY1rRgfA6Egg42g1mcCCvMWTYmrgAAhSrMRvq9NhGt-KkkWwSbt4BAAMCAAN5AAMqBA","file_unique_id":"AQADFKsxG-r02EZ-","file_size":37191,"width":1024,"height":768},{"file_id":"AgACAgEAAxkDAAMSY1rRgfA6Egg42g1mcCCvMWTYmrgAAhSrMRvq9NhGt-KkkWwSbt4BAAMCAAN4AAMqBA","file_unique_id":"AQADFKsxG-r02EZ9","file_size":43672,"width":800,"height":600}]}}
+0
+0
+1
+Connected to api.telegram.org
+..........
+{"ok":true,"result":{"message_id":19,"from":{"id":5650609996,"is_bot":true,"first_name":"MotionAlertCam_pet","username":"PetCamPir_bot"},"chat":{"id":1765125698,"first_name":"Lunara","last_name":"Cunha","username":"lcunha957","type":"private"},"date":1666896278,"photo":[{"file_id":"AgACAgEAAxkDAAMTY1rRlkPyvxMJIOP91Q2spiE4ZGwAAhWrMRvq9NhGradyW783ZbwBAAMCAANzAAMqBA","file_unique_id":"AQADFasxG-r02EZ4","file_size":1148,"width":90,"height":67},{"file_id":"AgACAgEAAxkDAAMTY1rRlkPyvxMJIOP91Q2spiE4ZGwAAhWrMRvq9NhGradyW783ZbwBAAMCAANtAAMqBA","file_unique_id":"AQADFasxG-r02EZy","file_size":9912,"width":320,"height":240},{"file_id":"AgACAgEAAxkDAAMTY1rRlkPyvxMJIOP91Q2spiE4ZGwAAhWrMRvq9NhGradyW783ZbwBAAMCAAN5AAMqBA","file_unique_id":"AQADFasxG-r02EZ-","file_size":37120,"width":1024,"height":768},{"file_id":"AgACAgEAAxkDAAMTY1rRlkPyvxMJIOP91Q2spiE4ZGwAAhWrMRvq9NhGradyW783ZbwBAAMCAAN4AAMqBA","file_unique_id":"AQADFasxG-r02EZ9","file_size":42369,"width":800,"height":600}]}}
+0
+1
+Connected to api.telegram.org
+..........
+{"ok":true,"result":{"message_id":20,"from":{"id":5650609996,"is_bot":true,"first_name":"MotionAlertCam_pet","username":"PetCamPir_bot"},"chat":{"id":1765125698,"first_name":"Lunara","last_name":"Cunha","username":"lcunha957","type":"private"},"date":1666896295,"photo":[{"file_id":"AgACAgEAAxkDAAMUY1rRp8_AVmyfdh3QCJFG6bBBavwAAharMRvq9NhGatvqzWSJnfgBAAMCAANzAAMqBA","file_unique_id":"AQADFqsxG-r02EZ4","file_size":1159,"width":90,"height":67},{"file_id":"AgACAgEAAxkDAAMUY1rRp8_AVmyfdh3QCJFG6bBBavwAAharMRvq9NhGatvqzWSJnfgBAAMCAANtAAMqBA","file_unique_id":"AQADFqsxG-r02EZy","file_size":10790,"width":320,"height":240},{"file_id":"AgACAgEAAxkDAAMUY1rRp8_AVmyfdh3QCJFG6bBBavwAAharMRvq9NhGatvqzWSJnfgBAAMCAAN5AAMqBA","file_unique_id":"AQADFqsxG-r02EZ-","file_size":38238,"width":1024,"height":768},{"file_id":"AgACAgEAAxkDAAMUY1rRp8_AVmyfdh3QCJFG6bBBavwAAharMRvq9NhGatvqzWSJnfgBAAMCAAN4AAMqBA","file_unique_id":"AQADFqsxG-r02EZ9","file_size":44861,"width":800,"height":600}]}}
+0
+0
+0
+0
+1
+Connected to api.telegram.org
+..........
+{"ok":true,"result":{"message_id":21,"from":{"id":5650609996,"is_bot":true,"first_name":"MotionAlertCam_pet","username":"PetCamPir_bot"},"chat":{"id":1765125698,"first_name":"Lunara","last_name":"Cunha","username":"lcunha957","type":"private"},"date":1666896315,"photo":[{"file_id":"AgACAgEAAxkDAAMVY1rRu2beU3Zuz4SaK0KcRgSMP38AAherMRvq9NhGwo1s22JQcmcBAAMCAANzAAMqBA","file_unique_id":"AQADF6sxG-r02EZ4","file_size":1162,"width":90,"height":67},{"file_id":"AgACAgEAAxkDAAMVY1rRu2beU3Zuz4SaK0KcRgSMP38AAherMRvq9NhGwo1s22JQcmcBAAMCAANtAAMqBA","file_unique_id":"AQADF6sxG-r02EZy","file_size":10859,"width":320,"height":240},{"file_id":"AgACAgEAAxkDAAMVY1rRu2beU3Zuz4SaK0KcRgSMP38AAherMRvq9NhGwo1s22JQcmcBAAMCAAN5AAMqBA","file_unique_id":"AQADF6sxG-r02EZ-","file_size":38353,"width":1024,"height":768},{"file_id":"AgACAgEAAxkDAAMVY1rRu2beU3Zuz4SaK0KcRgSMP38AAherMRvq9NhGwo1s22JQcmcBAAMCAAN4AAMqBA","file_unique_id":"AQADF6sxG-r02EZ9","file_size":44968,"width":800,"height":600}]}}
+0
+0
+0
+1
+Connected to api.telegram.org
+..........
+{"ok":true,"result":{"message_id":22,"from":{"id":5650609996,"is_bot":true,"first_name":"MotionAlertCam_pet","username":"PetCamPir_bot"},"chat":{"id":1765125698,"first_name":"Lunara","last_name":"Cunha","username":"lcunha957","type":"private"},"date":1666896335,"photo":[{"file_id":"AgACAgEAAxkDAAMWY1rRz2aSqHYzfxUt-_D0ttn263UAAhirMRvq9NhGcWj2SjqyFfoBAAMCAANzAAMqBA","file_unique_id":"AQADGKsxG-r02EZ4","file_size":1208,"width":90,"height":67},{"file_id":"AgACAgEAAxkDAAMWY1rRz2aSqHYzfxUt-_D0ttn263UAAhirMRvq9NhGcWj2SjqyFfoBAAMCAANtAAMqBA","file_unique_id":"AQADGKsxG-r02EZy","file_size":11501,"width":320,"height":240},{"file_id":"AgACAgEAAxkDAAMWY1rRz2aSqHYzfxUt-_D0ttn263UAAhirMRvq9NhGcWj2SjqyFfoBAAMCAAN5AAMqBA","file_unique_id":"AQADGKsxG-r02EZ-","file_size":42532,"width":1024,"height":768},{"file_id":"AgACAgEAAxkDAAMWY1rRz2aSqHYzfxUt-_D0ttn263UAAhirMRvq9NhGcWj2SjqyFfoBAAMCAAN4AAMqBA","file_unique_id":"AQADGKsxG-r02EZ9","file_size":48585,"width":800,"height":600}]}}
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+1
+Connected to api.telegram.org
+..........
+{"ok":true,"result":{"message_id":23,"from":{"id":5650609996,"is_bot":true,"first_name":"MotionAlertCam_pet","username":"PetCamPir_bot"},"chat":{"id":1765125698,"first_name":"Lunara","last_name":"Cunha","username":"lcunha957","type":"private"},"date":1666896370,"photo":[{"file_id":"AgACAgEAAxkDAAMXY1rR8quZLfG-6B45n2vRhnAVfdoAAhmrMRvq9NhG_sOLsnbL1IwBAAMCAANzAAMqBA","file_unique_id":"AQADGasxG-r02EZ4","file_size":1191,"width":90,"height":67},{"file_id":"AgACAgEAAxkDAAMXY1rR8quZLfG-6B45n2vRhnAVfdoAAhmrMRvq9NhG_sOLsnbL1IwBAAMCAANtAAMqBA","file_unique_id":"AQADGasxG-r02EZy","file_size":11516,"width":320,"height":240},{"file_id":"AgACAgEAAxkDAAMXY1rR8quZLfG-6B45n2vRhnAVfdoAAhmrMRvq9NhG_sOLsnbL1IwBAAMCAAN5AAMqBA","file_unique_id":"AQADGasxG-r02EZ-","file_size":41347,"width":1024,"height":768},{"file_id":"AgACAgEAAxkDAAMXY1rR8quZLfG-6B45n2vRhnAVfdoAAhmrMRvq9NhG_sOLsnbL1IwBAAMCAAN4AAMqBA","file_unique_id":"AQADGasxG-r02EZ9","file_size":47888,"width":800,"height":600}]}}
+0
+0
+0
+1
+Connected to api.telegram.org
+............
+{"ok":true,"result":{"message_id":24,"from":{"id":5650609996,"is_bot":true,"first_name":"MotionAlertCam_pet","username":"PetCamPir_bot"},"chat":{"id":1765125698,"first_name":"Lunara","last_name":"Cunha","username":"lcunha957","type":"private"},"date":1666896389,"photo":[{"file_id":"AgACAgEAAxkDAAMYY1rSBWoQ4nUKYM_4d9FeIysTzPUAAhqrMRvq9NhGTEg9Y3jaG8IBAAMCAANzAAMqBA","file_unique_id":"AQADGqsxG-r02EZ4","file_size":1189,"width":90,"height":67},{"file_id":"AgACAgEAAxkDAAMYY1rSBWoQ4nUKYM_4d9FeIysTzPUAAhqrMRvq9NhGTEg9Y3jaG8IBAAMCAANtAAMqBA","file_unique_id":"AQADGqsxG-r02EZy","file_size":11453,"width":320,"height":240},{"file_id":"AgACAgEAAxkDAAMYY1rSBWoQ4nUKYM_4d9FeIysTzPUAAhqrMRvq9NhGTEg9Y3jaG8IBAAMCAAN5AAMqBA","file_unique_id":"AQADGqsxG-r02EZ-","file_size":41241,"width":1024,"height":768},{"file_id":"AgACAgEAAxkDAAMYY1rSBWoQ4nUKYM_4d9FeIysTzPUAAhqrMRvq9NhGTEg9Y3jaG8IBAAMCAAN4AAMqBA","file_unique_id":"AQADGqsxG-r02EZ9","file_size":47801,"width":800,"height":600}]}}
+1
+Connected to api.telegram.org
+........
+{"ok":true,"result":{"message_id":25,"from":{"id":5650609996,"is_bot":true,"first_name":"MotionAlertCam_pet","username":"PetCamPir_bot"},"chat":{"id":1765125698,"first_name":"Lunara","last_name":"Cunha","username":"lcunha957","type":"private"},"date":1666896407,"photo":[{"file_id":"AgACAgEAAxkDAAMZY1rSFwIJr0vUUiM4HnnkxFj6BLIAAhurMRvq9NhGklfnV2DGBFABAAMCAANzAAMqBA","file_unique_id":"AQADG6sxG-r02EZ4","file_size":1187,"width":90,"height":67},{"file_id":"AgACAgEAAxkDAAMZY1rSFwIJr0vUUiM4HnnkxFj6BLIAAhurMRvq9NhGklfnV2DGBFABAAMCAANtAAMqBA","file_unique_id":"AQADG6sxG-r02EZy","file_size":11466,"width":320,"height":240},{"file_id":"AgACAgEAAxkDAAMZY1rSFwIJr0vUUiM4HnnkxFj6BLIAAhurMRvq9NhGklfnV2DGBFABAAMCAAN5AAMqBA","file_unique_id":"AQADG6sxG-r02EZ-","file_size":41379,"width":1024,"height":768},{"file_id":"AgACAgEAAxkDAAMZY1rSFwIJr0vUUiM4HnnkxFj6BLIAAhurMRvq9NhGklfnV2DGBFABAAMCAAN4AAMqBA","file_unique_id":"AQADG6sxG-r02EZ9","file_size":47810,"width":800,"height":600}]}}
+0
+0
+1
+Connected to api.telegram.org
+..........
+{"ok":true,"result":{"message_id":26,"from":{"id":5650609996,"is_bot":true,"first_name":"MotionAlertCam_pet","username":"PetCamPir_bot"},"chat":{"id":1765125698,"first_name":"Lunara","last_name":"Cunha","username":"lcunha957","type":"private"},"date":1666896426,"photo":[{"file_id":"AgACAgEAAxkDAAMaY1rSKhFUIrDr6WsKeT_Bvb5BGvQAAhyrMRvq9NhGD4zDuLu1G78BAAMCAANzAAMqBA","file_unique_id":"AQADHKsxG-r02EZ4","file_size":1195,"width":90,"height":67},{"file_id":"AgACAgEAAxkDAAMaY1rSKhFUIrDr6WsKeT_Bvb5BGvQAAhyrMRvq9NhGD4zDuLu1G78BAAMCAANtAAMqBA","file_unique_id":"AQADHKsxG-r02EZy","file_size":11480,"width":320,"height":240},{"file_id":"AgACAgEAAxkDAAMaY1rSKhFUIrDr6WsKeT_Bvb5BGvQAAhyrMRvq9NhGD4zDuLu1G78BAAMCAAN5AAMqBA","file_unique_id":"AQADHKsxG-r02EZ-","file_size":41471,"width":1024,"height":768},{"file_id":"AgACAgEAAxkDAAMaY1rSKhFUIrDr6WsKeT_Bvb5BGvQAAhyrMRvq9NhGD4zDuLu1G78BAAMCAAN4AAMqBA","file_unique_id":"AQADHKsxG-r02EZ9","file_size":48011,"width":800,"height":600}]}}
+0
+0
+1

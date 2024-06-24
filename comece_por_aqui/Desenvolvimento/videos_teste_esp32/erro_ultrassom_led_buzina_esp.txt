@@ -1,0 +1,29 @@
+Leitura do ultrassom em cm: 
+0.00
+----------------
+Led e buzina desligados
+/home/runner/work/esp32-arduino-lib-builder/esp32-arduino-lib-builder/esp-idf/components/freertos/queue.c:1442 (xQueueGenericReceive)- assert failed!
+abort() was called at PC 0x400899f1 on core 1
+
+ELF file SHA256: 0000000000000000
+
+Backtrace: 0x40088a50:0x3ffb1ed0 0x40088cc1:0x3ffb1ef0 0x400899f1:0x3ffb1f10 0x400d1297:0x3ffb1f50 0x400d0f1a:0x3ffb1f70 0x400d0ee4:0x3ffb1f90 0x400d1f21:0x3ffb1fb0 0x40089cc5:0x3ffb1fd0
+
+Rebooting...
+Iniciei.,,,
+Leitura do ultrassom em cm: 
+0.00
+----------------
+Led e buzina desligados
+/home/runner/work/esp32-arduino-lib-builder/esp32-arduino-lib-builder/esp-idf/components/freertos/queue.c:1442 (xQueueGenericReceive)- assert failed!
+abort() was called at PC 0x400899f1 on core 1
+
+ELF file SHA256: 0000000000000000
+
+Backtrace: 0x40088a50:0x3ffb1ed0 0x40088cc1:0x3ffb1ef0 0x400899f1:0x3ffb1f10 0x400d1297:0x3ffb1f50 0x400d0f1a:0x3ffb1f70 0x400d0ee4:0x3ffb1f90 0x400d1f21:0x3ffb1fb0 0x40089cc5:0x3ffb1fd0
+
+Rebooting...
+Iniciei.,,,
+Leitura do ultrassom em cm: 
+0.00
+----------------
