@@ -1,0 +1,87 @@
+Olá Márcia, esse é o Vídeo 01 da série de vídeos sobre a fase 03
+envolvendo a ESP32-CAM.
+
+Neste vídeo, faremos o procedimento 12.4 do Plano de Pesquisa,
+intitulado:
+Uso da placa ESP32 Wrover Module
+
+O circuito foi simulado o seu desenho no Fritzing, observe a tela adiante.
+
+Após observar a tela do Fritzing, faremos conforme o procedimento supracitado.
+Reveja o procedimento conforme adiante:
+
+********** 12.4. Procedimento: Uso da placa ESP32 Wrover Module *****************
+
+Conforme o autor TECHSTUDYCELL, 2020 verifica-se que:
+
+1. Como materiais, separe o ESP32-CAM, Arduíno UNO R3,
+ conversor FTDI 2323, 1 jumper amarelo, 1 jumper roxo, 2 jumpers verdes, 
+1 jumper vermelho, cabo mini USB.
+
+2. Realize a montagem dos jumpers entre a ESP32-CAM diretamente no Arduíno, 
+conforme a imagem 23 adiante: (é a imagem do Fritzing)
+
+Para montar no Fritzing, importamos as bibliotecas conforme o site:
+https://www.studiopieters.nl/fritzing/  com o procedimento explicado no 
+vídeo: https://www.youtube.com/watch?v=2P7eHA_D_C4&t=78s 
+ 
+
+Montamos a imagem no Arduíno físico também, observe.
+
+
+3. Abra o software Arduíno IDE. Vá em File, Preferences e 
+copie as urls no Additional Board Manager URLs:
+https://dl.espressif.com/dl/package_esp32_index.json
+http://arduino.esp8266.com/stable/package_esp8266com_index.json
+
+
+4. Vá para a guia Tools, Board: : “ESP32 Wrover Module”, Boards Manager,
+ type = ESP32. Instale a placa : esp32 by EspressIf Systems version 1.0.4 .
+
+5. Vá em File, Examples, ESP32, Camera, CameraWebServer.
+
+6. No código, deixe descomentado o #define CAMERA_MODEL_AI_THINKER.
+const char* ssid = "Lunara";
+const char* password = "d9-48Z11";
+
+7. Vá em Tools, Board:”ESP32 Wrover Module Board”. Em Flash Mode: “QIO”,
+ onde no esquema de partição escolha Huge App, Flash Frequency: 40MHz, 
+Upload Speed: 115200, port: COM3 (Arduino UNO), Programmer: AVR ISP. 
+Faça o upload do programa clicando na seta para direita.
+
+
+8. Aperte o botão de reset no módulo ESP32-CAM. Veja a transmissão
+ e recebimentos nos LEDs; após 1min o led ficou ligado. 
+Desconecte o cabo entre GPI0 com GND.
+ Mude no monitor serial a taxa de transmissão para 115200.
+
+9. Pressione o botão de reset da ESP32-CAM e capture o IP.
+
+
+Os itens 8 e 9 cabem algumas adaptações:
+Na prática, vou apertar o botão de reset do ESp32.
+Depois, vou clicar no upload do Arduíno IDE.
+Quando aparecer:
+Leaving....
+Please reset RTS button...
+é porque o upload foi completo e preciso configurar o Monitor Serial.
+Para tanto, antes eu preciso configurar a gravação do bootloader
+travando o modo flash. Por isso que tiro o jumper que liga os pinos
+GPIO0 do GND da ESP e ligo o monitor serial.
+Deixo o monitor serial com a mesma frequencia de transmissão do código
+(baud rate) em 115200.
+Dou reset no botão da ESP32 novamente, e espero carregar as credenciais
+do Wifi.
+Quando der: Wifi Connected ele vai fornecer o localIP da camera,
+a ser aberta em qualquer navegador.
+No caso, vou usar o Firefox.
+
+
+
+
+Copie em um bloco de notas e abra no navegador.
+ Irá abrir o software: Toogle OV2640 Settings, 
+conforme a imagem 24 adiante 
+(é a imagem do endereço da câmera, software: Toggle OV2640 Settings )
+
+
