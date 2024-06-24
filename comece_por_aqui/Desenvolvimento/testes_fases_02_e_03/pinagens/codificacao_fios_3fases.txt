@@ -1,0 +1,21 @@
+Led vermelho : somente fios vermelhos;
+Led verde: somente fios verde;
+
+Buzzers:
+Buzzer 1 (relacionado com sensores de presença e distância): fios cinza pro buzzer 1
+Buzzer 2 (relacionado com o sensor de gás): fios rosa pro buzzer 2
+
+
+Sensor de presença: fios verde;
+
+Sensor de distância: fios roxo;
+
+Sensor de gás: fios amarelo;
+
+Conversor FTDI RS232FL: fios laranja;
+
+ESP32-CAM: fios azul.
+
+Lado negativo da protoboard: fios branco;
+
+Lado positivo da protoboard: fios marrom;
