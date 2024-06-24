@@ -8,6 +8,6 @@ A partir do contexto de PetPlace em apartamentos como o da Minha Casa Minha Vida
 aliada a grande importância da adoção de pets em seu núcleo familiar. Se faz presente a necessidade de 
 um projeto ao qual estude o monitoramento de pets em ambiente doméstico a distância. 
 Como protótipo de sistemas embarcados, fizemos uma simulação em maquete utilizando conceitos
-avançados de Arduíno, ESP-CAM, sensores PIR e ultrassônico,canal robótico no Telegram.
+avançados de Arduíno, ESP32-CAM, sensores PIR e ultrassônico,canal robótico no Telegram.
 Dentro do recorte proposto, a maquete deu certo.
 Nota final: 10,0.
