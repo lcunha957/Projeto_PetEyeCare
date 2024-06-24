@@ -1,0 +1,57 @@
+FALTA TRANSCREVER:
+
+1. ITENS 2 A 5 DAS REGRAS DE SEGURANÇA FIREBASE FIRESTORE
+https://www.youtube.com/watch?v=v3SXmnwAJd0&list=PL9hacQcvMBGCtmUzYpYpjcIGanFu8KrIr&index=2
+
+2. COMO FAZER CRUD COM MYSQL E ANDROID STUDIO
+https://www.youtube.com/watch?v=ctcuVQY0QJ4&list=PLuUvvidbi-uBnXUTrPCUrpevXCR8KLZJR (SqlLite com Java)
+https://www.youtube.com/watch?v=g0_F0i1X6Kw&list=PLssIKrX2yyQEp1rv8vK4x343jMI8f7scw (MySQL com PHP)
+
+3. ESTRUTURA MVC NO ANDROID STUDIO
+https://www.youtube.com/watch?v=UE2v0gAKSzM
+
+4. CURSO PHYTON FUNDAÇÃO BRADESCO
+Cursos da Fundação Bradesco.
+https://lms.ev.org.br/mpls/Web/Portal/Main/NewsArticleDetail.aspx?ArticleID=13 Intermediário para Phyton
+
+https://lms.ev.org.br/mpls/Web/Portal/Main/NewsArticleDetail.aspx?ArticleID=2 básico para Phyton
+
+
+
+5. APLICATIVO DE RECONHECIMENTO DE OBJETOS (MACHINE LEARNING) ESCRITO
+EM PHYTON EM ANDROID STUDIO
+https://codelabs.developers.google.com/mlkit-android-odt?hl=pt-br#6
+
+
+6. MYSQL REMOTO
+https://remotemysql.com/#about
+
+7. COMO PASSAR UM IP COMO LOCAL DE ARMAZENAMENTO DE VÍDEOS DENTRO
+DE UMA TABELA SQL? PASSAR SITE DO GOOGLE DRIVE (VER TUTORIAL DO FILIPEFLOP
+-ESP32CAM PARA MONITORAR BEBÊS).
+
+
+8. COMO DEIXAR NA URL A FORMATAÇÃO DA IMAGEM E VÍDEO COMO:
+www.googledrive.com/{caminhodoprojeto}/imagem_timestamp.jpeg
+www.googledrive.com/{caminhodoprojeto}/video_timestamp.mp4
+
+
+9. TCC DOS VENTILADORES COM SISTEMA DE INCENDIO, ANDROID STUDIO E ARDUÍNO
+https://bsi.uniriotec.br/wp-content/uploads/sites/31/2020/05/201707ThadeuGoncalvesSandroSilveira.pdf
+
+
+10. VERBOS HTTP NO ANDROID STUDIO.
+
+
+11. IMPORTAR/EXPORTAR BANCO DE DADOS PHPMYADMIN XAMPP
+https://www.youtube.com/watch?v=BRplOqENH2E  (forma tradicional)
+https://docs.phpmyadmin.net/pt_BR/latest/import_export.html#sql-1 (documentaççao)
+https://www.youtube.com/watch?v=f8iQDmU2tWk (bd muito grande)
+
+
+12. CURSOS PHYTON PARA TÓPICOS EMBARCADOS E ANDROID STUDIO
+OBRIGATÓRIO:Introdução a Phyton, parte 1 coursera gratuito: https://www.coursera.org/learn/ciencia-computacao-python-conceitos#faq (pré-programação até listas) 
+OBRIGATÓRIO:Introdução a Phyton parte 2 coursera gratuito: https://www.coursera.org/learn/ciencia-computacao-python-conceitos-2 (de matrizes até recursão) 
+PDF do SEBRAE como guia para elaborar o Plano de Negócios: https://www.sebrae.com.br/Sebrae/Portal%20Sebrae/Anexos/COMO%20ELABORAR%20UM%20PLANO_baixa.pdf  
+OBRIGATÓRIO:trilha de 4 cursos patrocinado pela Unicamp: https://www.coursera.org/specializations/python-bash-sql-data-engineering-duke 
+Phyton 3 Programação, Universidade de Michigan, trilha de 5 cursos: https://www.coursera.org/programs/universidade-estadual-de-campinas-learning-program-ot7gr/view-all-collections/browse?collectionId=&productId=Tw7BjehDEeirrRITnOc3tA&productType=s12n&showMiniModal=true

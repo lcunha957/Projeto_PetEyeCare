@@ -1,0 +1,60 @@
+Dia 05-07-2022
+
+1. TCC sobre como passar o IP da camera e usar dentro
+do Android Studio: https://cepein.femanet.com.br/BDigital/arqTccs/0911270671.pdf
+
+2. Métodos sobre a API Camera dentro do Android Studio:
+https://developer.android.com/guide/topics/media/camera?hl=pt-br
+
+3. Como tirar fotos da camera no Android Studio:
+https://developer.android.com/training/camera/photobasics?hl=pt-br 
+
+4.Como controlar a camera no Android Studio:
+https://developer.android.com/training/camera/cameradirect?hl=pt-br#java
+
+5. Como fazer testes de camera usando o AVD no Android Studio:
+https://www.youtube.com/watch?v=VxLjlgrebWQ
+
+6. Como fazer um banco de dados para pesquisas em aplicação de Agenda
+ no Android Studio:
+https://www.youtube.com/watch?v=9ztGeljlMgs
+
+7. Playlist com passo a passo de cada método do crud dentro
+do banco de dados (Sql Lite) usando o Android Studio:
+https://www.youtube.com/watch?v=MT8jbS3rez8&list=PLHI7bDSQYkJgAmlV7kalxVvMExhbD1h9m
+
+
+8. Playlist do crud do Firebase com o Android Studio:
+https://www.youtube.com/watch?v=PE_riDivk6Y&list=PLfs7O23seKWkiN-kSr_jPIZc3cSgeN4mS
+
+9. Como adicionar o Firebase no Android Studio:
+https://firebase.google.com/docs/android/setup?hl=pt-br
+
+10. Integração do Banco de Dados com o Firebase e Android Studio:
+https://www.youtube.com/watch?v=QdoHqoMDkq4
+
+11. Como achar a pasta sqlLite dentro do ambiente Android Studio:
+https://acervolima.com/como-visualizar-e-localizar-o-banco-de-dados-sqlite-no-android-studio/
+
+12. Curso de Firebase no Android Studio: -- ok
+https://www.youtube.com/watch?v=fSfiCIwpx6E&list=PLizN3WA8HR1zcb5bX3Xq_eQ3h0ENJyQJ9
+
+13. Arduino RC CAR kit com bluetooth demonstração de como montar:
+https://www.youtube.com/watch?v=Pqs-3GgWW3s
+
+14. Chassi com suporte de bateria 4WD
+https://produto.mercadolivre.com.br/MLB-1425333526-kit-chassi-carro-4wd-robotica-arduino-_JM?matt_tool=40343894&matt_word=&matt_source=google&matt_campaign_id=14303413655&matt_ad_group_id=133855953276&matt_match_type=&matt_network=g&matt_device=c&matt_creative=584156655519&matt_keyword=&matt_ad_position=&matt_ad_type=pla&matt_merchant_id=114567802&matt_product_id=MLB1425333526&matt_product_partition_id=1413191055026&matt_target_id=pla-1413191055026&gclid=EAIaIQobChMIwvbN-ILj-AIVAeWRCh1XzAQREAQYBSABEgK22vD_BwE
+
+15. Chassi com suporte pra ESP32CAM e suporte de Sensor de distância, com tampa
+https://produto.mercadolivre.com.br/MLB-1670467844-kit-chassi-4-rodas-rob-para-arduino-sem-eletrnica-_JM#reco_item_pos=12&reco_backend=univb-items&reco_backend_type=low_level&reco_client=vip-v2p&reco_id=61d697bc-5506-43b7-9d19-7b9e2024c26c
+
+16. Mais informações sobre o item 15
+https://mauriciodgsantos.wixsite.com/easyds/pioneerds
+
+17.Curso: Desenvolvendo aplicações mobile com Android Studio, fundação Bradesco --ok
+https://www.ev.org.br/cursos/desenvolvendo-aplicacoes-mobile-com-android-studio
+
+
+
+
+
